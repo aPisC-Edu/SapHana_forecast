@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::TrendAndCyclicCV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="TrendAndCyclicCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::TrendAndCyclic">
+    <resourceUri>envduv_forecast.db.data::TrendAndCyclic</resourceUri>
+  </DataSource>
+  <DataSource id="envduv_forecast.db.data::TrendAndCyclicAnd_4Wn">
+    <resourceUri>envduv_forecast.db.data::TrendAndCyclicAnd_4Wn</resourceUri>
+  </DataSource>
+  <DataSource id="envduv_forecast.db.data::TrendAndCyclicAndWn">
+    <resourceUri>envduv_forecast.db.data::TrendAndCyclicAndWn</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_1" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="envduv_forecast.db.data::TrendAndCyclic" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="signal_time"/>
+      <viewAttribute id="signal_value" aggregationType="sum"/>
+      <viewAttribute id="signal_4n" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="envduv_forecast.db.data::TrendAndCyclic">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_value" source="signal_value"/>
+    </input>
+    <input node="envduv_forecast.db.data::TrendAndCyclicAnd_4Wn">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_4n" source="signal_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+    </input>
+    <joinAttribute name="signal_time"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1_2" cardinality="CN_N" joinType="inner" multiJoinNode="Join_1" multiJoinCentralTable="envduv_forecast.db.data::TrendAndCyclic" multiJoinOrder="Outside In">
+    <viewAttributes>
+      <viewAttribute id="signal_time"/>
+      <viewAttribute id="signal_value" aggregationType="sum"/>
+      <viewAttribute id="signal_wn" aggregationType="sum"/>
+      <viewAttribute id="signal_4n" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="delta_wn" datatype="DOUBLE" expressionLanguage="SQL">
+        <formula>&quot;signal_value&quot; - &quot;signal_wn&quot;</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="delta_4n" datatype="DOUBLE" expressionLanguage="SQL">
+        <formula>&quot;signal_value&quot; - &quot;signal_4n&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="Join_1_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_value" source="signal_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_4n" source="signal_4n"/>
+    </input>
+    <input node="envduv_forecast.db.data::TrendAndCyclicAndWn">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_wn" source="signal_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+    </input>
+    <joinAttribute name="signal_time"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1_2">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="Join_1_2" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="signal_value" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="signal_value"/>
+    </measure>
+    <measure id="signal_wn" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value_1"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="signal_wn"/>
+    </measure>
+    <measure id="signal_4n" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value_2"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="signal_4n"/>
+    </measure>
+    <measure id="delta_wn" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="delta_wn"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="delta_wn"/>
+    </measure>
+    <measure id="delta_4n" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="delta_4n"/>
+      <measureMapping columnObjectName="Join_1_2" columnName="delta_4n"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="87" y="222"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="envduv_forecast.db.data::TrendAndCyclic" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="24" y="31"/>
+      <rectangleSize width="304.720703125"/>
+    </shape>
+    <shape modelObjectName="envduv_forecast.db.data::TrendAndCyclicAndWn" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="515" y="25"/>
+      <rectangleSize width="346.703125"/>
+    </shape>
+    <shape modelObjectName="envduv_forecast.db.data::TrendAndCyclicAnd_4Wn" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput" multiJoinViewNodeName="Join_1">
+      <upperLeftCorner x="41" y="193"/>
+      <rectangleSize width="360.05078125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

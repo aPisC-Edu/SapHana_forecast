@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::OzoneCV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="OzoneCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::Ozone">
+    <resourceUri>envduv_forecast.db.data::Ozone</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="envduv_forecast.db.data::Ozone">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="Ozone" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="signal_value" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value"/>
+      <measureMapping columnObjectName="Ozone" columnName="signal_value"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

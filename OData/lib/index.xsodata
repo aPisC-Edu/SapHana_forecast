@@ -1,0 +1,14 @@
+service {
+    "envduv_forecast.db.data::CashFlowsCV" as "CashFlows" 
+    keys generate local "GENID";
+    "envduv_forecast.db.data::CashFlowsForecastCV" as "CashFlowsForecast" 
+    keys generate local "GENID";
+    "envduv_forecast.db.data::CashFlowsSeasonalityCV" as "CashFlowsSeasonality" 
+    keys generate local "GENID";
+    "envduv_forecast.db.data::OzoneCV" as "Ozone" 
+    keys generate local "GENID";
+    "envduv_forecast.db.data::Lag1CV" as "Lag1" 
+    keys generate local "GENID";
+    "envduv_forecast.db.data::TrendAndCyclicCV" as "TrendAndCyclic" 
+    keys generate local "GENID";
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::CashFlowsForecastCV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CashFlowsForecastCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::CashFlowsForecast">
+    <resourceUri>envduv_forecast.db.data::CashFlowsForecast</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="envduv_forecast.db.data::CashFlowsForecast">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="CashFlowsForecast" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="signal_value" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value"/>
+      <measureMapping columnObjectName="CashFlowsForecast" columnName="signal_value"/>
+    </measure>
+    <measure id="kts_1" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="kts_1"/>
+      <measureMapping columnObjectName="CashFlowsForecast" columnName="kts_1"/>
+    </measure>
+    <measure id="kts_1_lowerlimit_95%" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="kts_1_lowerlimit_95%"/>
+      <measureMapping columnObjectName="CashFlowsForecast" columnName="kts_1_lowerlimit_95%"/>
+    </measure>
+    <measure id="kts_1_upperlimit_95%" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="kts_1_upperlimit_95%"/>
+      <measureMapping columnObjectName="CashFlowsForecast" columnName="kts_1_upperlimit_95%"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

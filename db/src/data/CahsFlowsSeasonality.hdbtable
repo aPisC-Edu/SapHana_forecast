@@ -1,0 +1,12 @@
+
+
+column table "envduv_forecast.db.data::CashFlowsSeasonality" (
+    "signal_time"  INTEGER CS_INT NOT NULL,
+    "seasonal"      DOUBLE CS_DOUBLE,
+    "trend"              DOUBLE CS_DOUBLE,
+    "random"             DOUBLE CS_DOUBLE,
+    PRIMARY KEY (
+        "signal_time"
+    )
+);
+

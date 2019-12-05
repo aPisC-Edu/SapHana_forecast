@@ -1,0 +1,10 @@
+column table "envduv_forecast.db.data::CashFlowsForecast" (
+    "signal_time"  DATE CS_DAYDATE NOT NULL,
+    "signal_value"      DOUBLE CS_DOUBLE,
+    "kts_1"              DOUBLE CS_DOUBLE,
+    "kts_1_lowerlimit_95%" DOUBLE CS_DOUBLE,
+    "kts_1_upperlimit_95%" DOUBLE CS_DOUBLE,
+    PRIMARY KEY (
+        "signal_time"
+    )
+);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::CashFlowsCV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CashFlowsCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::CashFlows">
+    <resourceUri>envduv_forecast.db.data::CashFlows</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="envduv_forecast.db.data::CashFlows">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="CashFlows" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="signal_value" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value"/>
+      <measureMapping columnObjectName="CashFlows" columnName="signal_value"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="100" y="105"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

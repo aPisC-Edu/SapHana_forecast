@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::CashFlowsSeasonalityCV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="CashFlowsSeasonalityCV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::CashFlowsSeasonality">
+    <resourceUri>envduv_forecast.db.data::CashFlowsSeasonality</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews/>
+<logicalModel id="envduv_forecast.db.data::CashFlowsSeasonality">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="CashFlowsSeasonality" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="seasonal" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="seasonal"/>
+      <measureMapping columnObjectName="CashFlowsSeasonality" columnName="seasonal"/>
+    </measure>
+    <measure id="trend" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="trend"/>
+      <measureMapping columnObjectName="CashFlowsSeasonality" columnName="trend"/>
+    </measure>
+    <measure id="random" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="random"/>
+      <measureMapping columnObjectName="CashFlowsSeasonality" columnName="random"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

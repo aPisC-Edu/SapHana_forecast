@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="envduv_forecast.db.data::Lag1CV" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" outputViewType="Aggregation" cacheInvalidationPeriod="NONE" enforceSqlExecution="false">
+<descriptions defaultDescription="Lag1CV"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="envduv_forecast.db.data::Lag1AndCycles">
+    <resourceUri>envduv_forecast.db.data::Lag1AndCycles</resourceUri>
+  </DataSource>
+  <DataSource id="envduv_forecast.db.data::Lag1AndCyclesAndWn">
+    <resourceUri>envduv_forecast.db.data::Lag1AndCyclesAndWn</resourceUri>
+  </DataSource>
+</dataSources>
+<calculationViews>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="inner">
+    <viewAttributes>
+      <viewAttribute id="signal_time"/>
+      <viewAttribute id="signal_value" aggregationType="sum"/>
+      <viewAttribute id="signal_wn" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="delta" datatype="DOUBLE" expressionLanguage="SQL">
+        <formula>&quot;signal_value&quot; - &quot;signal_wn&quot;</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <restrictedViewAttributes/>
+    <input node="envduv_forecast.db.data::Lag1AndCycles">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_value" source="signal_value"/>
+    </input>
+    <input node="envduv_forecast.db.data::Lag1AndCyclesAndWn">
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_wn" source="signal_value"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="signal_time" source="signal_time"/>
+    </input>
+    <joinAttribute name="signal_time"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="signal_time" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="signal_time"/>
+      <keyMapping columnObjectName="Join_1" columnName="signal_time"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="signal_value" order="2" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value"/>
+      <measureMapping columnObjectName="Join_1" columnName="signal_value"/>
+    </measure>
+    <measure id="signal_wn" order="3" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="signal_value_1"/>
+      <measureMapping columnObjectName="Join_1" columnName="signal_wn"/>
+    </measure>
+    <measure id="delta" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="delta"/>
+      <measureMapping columnObjectName="Join_1" columnName="delta"/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="40" y="85"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="106" y="207"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="envduv_forecast.db.data::Lag1AndCycles" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="38" y="59"/>
+      <rectangleSize width="303"/>
+    </shape>
+    <shape modelObjectName="envduv_forecast.db.data::Lag1AndCyclesAndWn" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="345"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>
